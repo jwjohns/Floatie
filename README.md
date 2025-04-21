@@ -33,6 +33,8 @@ docker build -t floatie:latest .
 
 ## Usage
 
+### Standalone Mode
+
 ```bash
 # Run directly
 sudo ./floatie --pid-ns-inum 0 --max-map-entries 1024
@@ -50,6 +52,51 @@ docker run --rm -it \
 
 Access Prometheus metrics at `http://localhost:9090/metrics`
 
+### Embedded In Your Application Container
+
+For best integration, embed Floatie directly in your application container:
+
+```dockerfile
+# Stage 1: Build Floatie
+FROM ubuntu:22.04 as floatie-builder
+
+# Install dependencies and build Floatie
+# ...
+
+# Stage 2: Your application with Floatie
+FROM python:3.11-slim
+
+# Copy Floatie binary
+COPY --from=floatie-builder /build/floatie/floatie /usr/local/bin/floatie
+
+# Your application setup
+# ...
+
+# Start script that runs both Floatie and your app
+ENTRYPOINT ["/start.sh"]
+```
+
+Start script (`start.sh`):
+```bash
+#!/bin/bash
+# Start Floatie in the background
+floatie --pid-ns-inum=0 --max-map-entries=1024 &
+
+# Start your application
+python /app/main.py
+```
+
+See the [embedded example](examples/embedded/) for a complete implementation.
+
+## Available Metrics
+
+| Metric | Type | Description |
+|--------|------|-------------|
+| `floatie_overlayfs_read_latency_us` | Histogram | Read latency in microseconds |
+| `floatie_overlayfs_write_latency_us` | Histogram | Write latency in microseconds |
+| `floatie_oom_kills_total` | Counter | Total number of OOM kill events |
+| `floatie_memory_pressure_score` | Gauge | Current memory pressure score (0-100) |
+
 ## License
 
-[MIT License](LICENSE)
+This project is licensed under the [GNU General Public License v3.0](LICENSE) - see the LICENSE file for details.

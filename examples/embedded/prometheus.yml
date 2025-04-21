@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'app'
+    static_configs:
+      - targets: ['app-with-floatie:8000']
+        labels:
+          app: 'example-app'
+
+  - job_name: 'floatie'
+    static_configs:
+      - targets: ['app-with-floatie:9090']
+        labels:
+          app: 'floatie'

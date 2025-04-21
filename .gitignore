@@ -30,3 +30,11 @@ go.work
 
 # OS files
 .DS_Store
+
+# Private project files
+plan.md
+concept.md
+
+# Unnecessary graphics
+images/floatie-duck.svg
+images/floatie-duck.png

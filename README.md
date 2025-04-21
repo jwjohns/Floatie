@@ -1,6 +1,20 @@
-# Floatie
+<div align="center">
+  <img src="images/logo-ducky.png" alt="Floatie Logo" width="200"/>
+  
+  # Floatie
+  
+  ### Stay afloat in containerized environments with eBPF-powered monitoring
+  
+  [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+  [![Linux](https://img.shields.io/badge/platform-linux-lightgrey)](https://www.kernel.org/)
+  [![eBPF](https://img.shields.io/badge/tech-eBPF-orange)](https://ebpf.io/)
+  [![Prometheus](https://img.shields.io/badge/metrics-prometheus-red)](https://prometheus.io/)
+  
+</div>
 
-Floatie is an eBPF-powered observability tool for monitoring container performance. It uses eBPF probes to provide insights into overlayFS latency and OOM kill events, helping you stay afloat in the chaotic seas of containerized environments.
+Floatie is an eBPF-powered observability tool for monitoring container performance. It uses eBPF probes to provide insights into overlayFS latency and OOM kill events, helping you stay afloat in the chaotic seas of containerized environments. 
+
+**Why Floatie?** Just as a swimming floatie keeps you buoyant in water, this tool keeps your containers observable and monitored with minimal overhead. Deploy it directly inside your containers for real-time insights into storage and memory performance.
 
 ## Features
 
